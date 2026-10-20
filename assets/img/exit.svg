@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg id="regular" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 60 60">
+  <g>
+    <rect width="60" height="60" fill="#454647" stroke="#231f20" stroke-miterlimit="10" stroke-width=".5"/>
+    <rect x="2.17" y="2.17" width="55.67" height="55.67" fill="#454647" stroke="#231f20" stroke-miterlimit="10" stroke-width=".25"/>
+    <circle cx="6.61" cy="6.84" r="2.07" fill="#454647" stroke="#231f20" stroke-miterlimit="10" stroke-width=".25"/>
+    <circle cx="6.61" cy="53.6" r="2.07" fill="#454647" stroke="#231f20" stroke-miterlimit="10" stroke-width=".25"/>
+    <circle cx="53.66" cy="53.6" r="2.07" fill="#454647" stroke="#231f20" stroke-miterlimit="10" stroke-width=".25"/>
+    <circle cx="53.66" cy="6.84" r="2.07" fill="#454647" stroke="#231f20" stroke-miterlimit="10" stroke-width=".25"/>
+  </g>
+  <rect x="12.79" y="12.79" width="34.41" height="34.41" fill="#515151" stroke="#231f20" stroke-miterlimit="10"/>
+  <rect x="12.6" y="21.11" width="34.79" height="17.78" fill="#231f20"/>
+  <polygon points="12.79 12.79 12.79 30.59 18 30.59 19.65 26.4 42.57 26.4 44.03 30 47.4 30 47.4 12.79 12.79 12.79" fill="#444"/>
+  <polygon points="47.4 47.21 47.4 36.05 42.19 36.05 40.54 38.68 17.62 38.68 16.16 36.42 12.79 36.42 12.79 47.21 47.4 47.21" fill="#444"/>
+</svg>

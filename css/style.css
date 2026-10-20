@@ -1,0 +1,450 @@
+html, body {
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    height: 100%;
+    font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+    background-color: #111;
+    color: #fff;
+}
+
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #111;
+    position: relative;
+}
+
+#playSpace {
+    width: 600px;
+    height: 600px;
+    position: relative;
+    border: 3px solid #fff;
+    background-color: #222;
+    box-shadow: 0 0 20px #80ff00 inset, 0 0 15px #c0ff00;
+}
+
+.tile {
+    box-sizing: border-box;
+    border: 1px solid rgba(255,255,255,0.1);
+    width: 80px;
+    height: 80px;
+    position: absolute;
+    background-size: cover;
+}
+
+#hero, #derplenaut {
+    position: absolute;
+    width: 80px;
+    height: 80px;
+    z-index: 10;
+}
+.popup {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -55%);
+    z-index: 100;
+    text-align: center;
+    padding: 25px 40px;
+    border-radius: 12px;
+    background-color: #1c1c1c;
+    color: #e6ff7f;
+    box-shadow: 0 0 15px rgba(230, 255, 127, 0.5), 0 0 40px rgba(230, 255, 127, 0.2) inset;
+    border: 2px solid #aaff4c;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.3s ease-in-out, transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+    font-family: 'Segoe UI', sans-serif;
+}
+
+.popup.visible {
+    opacity: 1;
+    visibility: visible;
+    transform: translate(-50%, -50%);
+}
+
+.popup h2 {
+    font-size: 2em;
+    font-weight: 700;
+    margin-bottom: 12px;
+    color: #dfff7f;
+}
+
+.popup p {
+    color: #d4ff9f;
+    font-size: 1.15rem;
+    line-height: 1.5;
+}
+
+.popup button {
+    padding: 10px 22px;
+    margin-top: 20px;
+    border-radius: 10px;
+    font-size: 1em;
+    font-weight: 600;
+    cursor: pointer;
+    border: 2px solid #c0ff00;
+    background: linear-gradient(145deg, #dfff7f, #aaff4c);
+    color: #1c1c1c;
+    text-transform: uppercase;
+    transition: all 0.25s ease;
+    box-shadow: 0 0 8px rgba(208, 255, 127, 0.5);
+}
+
+.popup button:hover {
+    transform: scale(1.05);
+    box-shadow: 0 0 15px rgba(208, 255, 127, 0.8);
+}
+
+.game-over-popup {
+    border-top: 4px solid #ffb347;
+    background-color: #1c1c1c;
+    box-shadow: 0 0 15px rgba(255, 179, 71, 0.5);
+}
+
+.game-over-popup h2 {
+    color: #ffcc66;
+}
+
+.game-over-popup p {
+    color: #ffe5b4;
+}
+
+.game-over-popup button {
+    background: linear-gradient(145deg, #ffb347, #ffcc66);
+    border-color: #ffb347;
+    color: #1c1c1c;
+}
+
+.game-over-popup button:hover {
+    background: linear-gradient(145deg, #ff9933, #ffaa55);
+}
+
+.win-popup {
+    border-top: 4px solid #8aff7f;
+    background-color: #1c1c1c;
+    box-shadow: 0 0 15px rgba(138, 255, 127, 0.5);
+}
+
+.win-popup h2 {
+    color: #baff99;
+}
+
+.win-popup p {
+    color: #d4ffb4;
+}
+
+.win-popup button {
+    background: linear-gradient(145deg, #8aff7f, #baff99);
+    border-color: #8aff7f;
+    color: #1c1c1c;
+}
+
+.win-popup button:hover {
+    background: linear-gradient(145deg, #66ff55, #99ff88);
+}
+
+.win-popup button:hover {
+    background-color: #27ae60;
+}
+
+.start-screen {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    /* Darker, richer gradient */
+    background: radial-gradient(circle at center, #1a1a1a 0%, #050505 100%);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    color: #c0ff00;
+    font-family: 'Handjet', sans-serif;
+    z-index: 1000;
+    text-align: center;
+    overflow: hidden;
+}
+
+/* 1. The "CRT/Scanline" Overlay - Adds instant texture */
+.start-screen::before {
+    content: " ";
+    position: absolute;
+    top: 0; left: 0; width: 100%; height: 100%;
+    background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.25) 50%), 
+                linear-gradient(90deg, rgba(255, 0, 0, 0.03), rgba(0, 255, 0, 0.01), rgba(0, 0, 255, 0.03));
+    background-size: 100% 3px, 3px 100%;
+    pointer-events: none;
+    z-index: 1001;
+}
+
+.start-screen h1 {
+    font-size: 8rem; /* Bigger impact */
+    margin-bottom: 3rem;
+    color: #c0ff00;
+    letter-spacing: -2px;
+    text-transform: uppercase;
+    /* Multilayered glow for depth */
+    text-shadow:
+        0 0 10px rgba(192, 255, 0, 0.8),
+        0 0 20px rgba(192, 255, 0, 0.4),
+        0 0 40px rgba(192, 255, 0, 0.2);
+    animation: glowPulse 2s infinite alternate;
+}
+
+.start-screen .buttons {
+    display: flex;
+    gap: 2.5rem;
+    z-index: 1002; /* Ensure buttons are clickable above overlay */
+}
+
+.start-screen .buttons button {
+    padding: 1rem 3.5rem;
+    font-size: 1.8rem;
+    font-family: 'Handjet', sans-serif;
+    font-weight: 900;
+    border: 2px solid #c0ff00;
+    cursor: pointer;
+    transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+    position: relative;
+    text-transform: uppercase;
+    clip-path: polygon(10% 0, 100% 0, 100% 70%, 90% 100%, 0 100%, 0 30%); /* Angled "Gaming" corners */
+}
+
+/* Primary Button (Start) */
+#startButton {
+    background: #c0ff00;
+    color: #000;
+    box-shadow: 0 0 20px rgba(192, 255, 0, 0.4);
+}
+
+#startButton:hover {
+    transform: translateY(-5px) scale(1.05);
+    background: #fff;
+    border-color: #fff;
+    box-shadow: 0 0 40px rgba(255, 255, 255, 0.6);
+}
+
+/* Secondary Button (Instructions) */
+#instructionsButton {
+    background: rgba(192, 255, 0, 0.1);
+    color: #c0ff00;
+}
+
+#instructionsButton:hover {
+    transform: translateY(-5px) scale(1.05);
+    background: rgba(192, 255, 0, 0.3);
+    box-shadow: 0 0 20px rgba(192, 255, 0, 0.4);
+}
+
+@keyframes glowPulse {
+    from { filter: brightness(1) contrast(1); }
+    to { filter: brightness(1.2) contrast(1.2); }
+}
+
+#instructionsText {
+    margin-top: 2rem;
+    color: #dfff00;
+    text-align: left;
+    max-width: 600px;
+    font-size: 1.3rem;
+    line-height: 1.6;
+    background: rgba(0, 0, 0, 0.6);
+    padding: 1.5rem;
+    border-radius: 10px;
+    box-shadow: 0 0 15px #c0ff00 inset;
+}
+
+
+body::before {
+    content: "";
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: transparent;
+    pointer-events: none;
+    z-index: 0;
+    overflow: hidden;
+}
+
+    .instructions-card {
+        margin: 2.5rem auto 0 auto;
+        max-width: 520px;
+        background: linear-gradient(135deg, #232323 60%, #2a2a2a 100%);
+        border-radius: 22px;
+        box-shadow: 0 0 32px #c0ff00, 0 0 18px #aaff00 inset, 0 4px 32px #000;
+        border: 3px solid #c0ff00;
+        padding: 2.8rem 2.2rem 2rem 2.2rem;
+        color: #f6ffdf;
+        font-size: 1.22rem;
+        line-height: 1.8;
+        opacity: 0;
+        transform: translateY(-20px);
+        transition: opacity 0.35s cubic-bezier(.4,0,.2,1), transform 0.35s cubic-bezier(.4,0,.2,1);
+        display: none;
+        z-index: 1100;
+        font-family: 'Montserrat', 'Poppins', 'Segoe UI', sans-serif;
+        position: relative;
+        overflow: hidden;
+    }
+    .instructions-card::before {
+        content: "";
+        position: absolute;
+        top: 0; left: 0; right: 0; height: 8px;
+        background: linear-gradient(90deg, #c0ff00 0%, #aaff00 50%, #80ff00 100%);
+        border-radius: 22px 22px 0 0;
+        opacity: 0.7;
+    }
+    .instructions-card::after {
+        content: "";
+        position: absolute;
+        bottom: 0; left: 0; right: 0; height: 8px;
+        background: linear-gradient(90deg, #c0ff00 0%, #aaff00 50%, #80ff00 100%);
+        border-radius: 0 0 22px 22px;
+        opacity: 0.7;
+    }
+    
+    .instructions-card.visible {
+        opacity: 1;
+        transform: translateY(0);
+        display: block;
+    }
+    .instructions-header {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin-bottom: 1.8rem;
+    }
+    
+    .instructions-icon {
+        font-size: 2.2rem;
+        color: #c0ff00;
+        filter: drop-shadow(0 0 8px #c0ff00);
+    }
+    .instructions-header h2 {
+        font-size: 2.4rem;
+        font-weight: 700;
+        margin: 0;
+        letter-spacing: 1px;
+        background: linear-gradient(90deg, #c0ff00 0%, #aaff00 50%, #80ff00 100%);
+        color: transparent;
+        -webkit-background-clip: text;
+        background-clip: text;
+        animation: instructions-glow 2s infinite alternate;
+        font-family: 'Montserrat', 'Poppins', sans-serif;
+    }
+    @keyframes instructions-glow {
+        0% { filter: drop-shadow(0 0 6px #c0ff00); }
+        100% { filter: drop-shadow(0 0 16px #aaff00); }
+    }
+    
+    .instructions-body ul {
+        margin: 1rem 0 1.2rem 0;
+        padding-left: 1.2rem;
+        list-style: disc;
+    }
+    .instructions-list {
+        margin-bottom: 1.2rem;
+        padding: 0.5rem 0 0.5rem 0;
+        background: rgba(255,255,255,0.04);
+        border-radius: 10px;
+        box-shadow: 0 0 8px #c0ff00 inset;
+    }
+    
+    .instructions-label {
+        color: #c0ff00;
+        font-weight: 700;
+        margin-right: 0.3em;
+        font-family: 'Poppins', 'Montserrat', sans-serif;
+        letter-spacing: 0.03em;
+        font-size: 1.08em;
+    }
+    .instructions-welcome {
+        color: #f6ffdf;
+        font-size: 1.22rem;
+        margin-bottom: 1.1rem;
+        font-family: 'Poppins', 'Montserrat', sans-serif;
+        text-align: center;
+        letter-spacing: 0.02em;
+    }
+    .instructions-goodluck {
+        color: #c0ff00;
+        font-size: 1.18rem;
+        margin-top: 1.2rem;
+        font-weight: 600;
+        text-align: center;
+        font-family: 'Montserrat', 'Poppins', sans-serif;
+        letter-spacing: 0.03em;
+    }
+    
+    .instructions-body li {
+        margin-bottom: 0.7rem;
+        font-size: 1.18rem;
+        color: #f6ffdf;
+        letter-spacing: 0.02em;
+        font-family: 'Poppins', 'Montserrat', sans-serif;
+    }
+    .instructions-body .key {
+        display: inline-block;
+        background: linear-gradient(90deg, #232323 60%, #2a2a2a 100%);
+        color: #c0ff00;
+        border-radius: 6px;
+        padding: 0.15em 0.5em;
+        font-family: 'Montserrat', 'Poppins', 'Segoe UI', monospace;
+        font-size: 1.08em;
+        box-shadow: 0 0 4px #c0ff00 inset;
+        margin-left: 0.2em;
+        border: 1.5px solid #c0ff00;
+        letter-spacing: 0.04em;
+    }
+    .instructions-body p {
+        color: #f6ffdf;
+        margin-bottom: 0.7rem;
+        font-size: 1.15rem;
+        font-family: 'Poppins', 'Montserrat', sans-serif;
+    }
+
+.particle {
+    position: absolute;
+    width: 6px;
+    height: 6px;
+    background: radial-gradient(circle, #c0ff00 0%, #80ff00 70%, transparent 100%);
+    border-radius: 50%;
+    animation: floatParticle linear infinite;
+    opacity: 0.6;
+    pointer-events: none;
+}
+
+@keyframes floatParticle {
+    0% {
+        transform: translate(var(--startX), var(--startY)) scale(0.5);
+        opacity: 0;
+    }
+    10% {
+        opacity: 0.6;
+    }
+    100% {
+        transform: translate(var(--endX), var(--endY)) scale(1.2);
+        opacity: 0;
+    }
+}
+
+#messageArea {
+    width: 600px;
+    margin-bottom: 10px;
+    padding: 12px 20px;
+    border-radius: 10px;
+    background: #1c1c1c;
+    color: #e6ff7f;
+    font-size: 1.2rem;
+    text-align: center;
+    font-weight: 600;
+    box-shadow: 0 0 10px #aaff4c, 0 0 20px #dfff7f inset;
+    border: 2px solid #aaff4c;
+    font-family: 'Segoe UI', sans-serif;
+}

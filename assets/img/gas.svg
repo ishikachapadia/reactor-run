@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg id="Layer_2" data-name="Layer 2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 60 60">
+  <rect width="60" height="60" fill="#454647" stroke="#231f20" stroke-miterlimit="10" stroke-width=".5"/>
+  <rect x="2.17" y="2.17" width="55.67" height="55.67" fill="#454647" stroke="#231f20" stroke-miterlimit="10" stroke-width=".25"/>
+  <circle cx="6.61" cy="6.84" r="2.07" fill="#454647" stroke="#231f20" stroke-miterlimit="10" stroke-width=".25"/>
+  <circle cx="6.61" cy="53.6" r="2.07" fill="#454647" stroke="#231f20" stroke-miterlimit="10" stroke-width=".25"/>
+  <circle cx="53.66" cy="53.6" r="2.07" fill="#454647" stroke="#231f20" stroke-miterlimit="10" stroke-width=".25"/>
+  <circle cx="53.66" cy="6.84" r="2.07" fill="#454647" stroke="#231f20" stroke-miterlimit="10" stroke-width=".25"/>
+  <rect x="20.48" y="23.2" width="19.05" height="13.59" fill="#2d2d2d" stroke="#231f20" stroke-miterlimit="10" stroke-width=".25"/>
+  <rect x="28.62" y="25.38" width="2.76" height="8.63" rx=".66" ry=".66"/>
+  <rect x="23.02" y="25.38" width="2.76" height="8.63" rx=".66" ry=".66"/>
+  <rect x="34.21" y="25.38" width="2.76" height="8.63" rx=".66" ry=".66"/>
+</svg>
